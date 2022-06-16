@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Video Player</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			body{
+				background-color: #000;
+			}
+			button{
+				background-color: white;
+				font-size: 17px;
+				border: 10px solid transparent;
+			}
+		</style>
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl">
+		<center><b style="font-size:35px; color:#345eeb;"><u>VIDEO PLAYER</u></b></center>
+		<div style="padding:7px">
+			<center>
+				<video id="vid" height="470" width="810" style="border:7px solid #345eeb; background-color:black">
+					<source src="C:/Users/ELCOT/Videos/Girls_Possessive_attitude.mp4" type="video/mp4">
+				</video>
+			</center><br>
+			<center>
+				<button id="ply" ng-click="vid_back()"><i class="fa fa-backward"></i></button>
+				<button id="ply" ng-click="vid_play()"><i class="fa fa-play"></i><b>/</b><i class="fa fa-pause"></i></button>
+				<button id="ply" ng-click="vid_forw()"><i class="fa fa-forward"></i></button>
+				<button ng-click="vid_stop()"><i class="fa fa-stop"></i></button>
+				<button id="ply" ng-click="mute()"><i class="fa fa-volume-up"></i></button>
+			</center>
+		</div>
+		<script>
+			var app=angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				var vid = document.getElementById("vid");
+				var flag=0;
+				var flag_vol = 0;
+				$scope.vid_play=function(){
+					if(flag==0){
+						vid.play();
+						flag=1;
+					}
+					else{
+						vid.pause();
+						flag=0;
+					}
+				}
+				$scope.vid_stop=function(){
+					vid.pause();
+					vid.currentTime=0;
+				}
+				$scope.vid_forw=function(){
+					vid.currentTime=vid.currentTime+10;
+				}
+				$scope.vid_back=function(){
+					vid.currentTime=vid.currentTime-10;
+				}
+				$scope.mute = function(){
+					if(flag_vol==0)
+					{
+						vid.muted = true;
+						flag_vol=1;
+					}
+					else{
+						vid.muted = false;
+						flag_vol=0;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
